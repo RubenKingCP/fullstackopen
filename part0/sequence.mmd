@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server : POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->>browser : code 302 redirects to exampleapp/note
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser:the HTML file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the CSS file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the Javascript file
+    deactivate server
+
+    Note right of browser: The browser executes the code in the Javascript File and get the data from JSON file
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser:  [{"content":"as","date":"2023-03-04T03:24:32.167Z"},……]
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes
